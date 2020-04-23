@@ -27,6 +27,12 @@ const ButtonPanel = () => (
       <Button name={buttons[12]} />
       <Button name={buttons[13]} />
       <Button name={buttons[14]} />
+      <Button name={buttons[15]} />
+    </div>
+    <div className="groupFive">
+      <Button name={buttons[16]} />
+      <Button name={buttons[17]} />
+      <Button name={buttons[18]} />
     </div>
   </div>
 );
