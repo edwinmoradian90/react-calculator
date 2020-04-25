@@ -17,5 +17,5 @@ Display.propTypes = {
 };
 
 Display.defaultProps = {
-  result: '',
+  result: '0',
 };
