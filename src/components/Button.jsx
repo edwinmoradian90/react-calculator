@@ -9,7 +9,6 @@ const Button = props => {
   const clickHandler = e => {
     const buttonName = e.target.getAttribute('name');
     handleClick(buttonName);
-    console.log(buttonName);
   };
 
   return (
