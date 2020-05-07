@@ -2,12 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Button = props => {
-  const { name, color, wide } = props;
-  const style = {
-    background: color,
+  const {
+    name, color, wide, handleClick,
+  } = props;
+  const style = { background: color };
+  const clickHandler = e => {
+    const buttonName = e.target.getAttribute('name');
+    handleClick(buttonName);
+    console.log(buttonName);
   };
+
   return (
-    <div style={style} className={wide ? 'buttonWide' : 'button'}>
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={clickHandler}
+      onKeyDown={clickHandler}
+      name={name}
+      style={style}
+      className={wide ? 'buttonWide' : 'button'}
+    >
       {name}
     </div>
   );
@@ -19,6 +33,7 @@ Button.propTypes = {
   name: PropTypes.string,
   color: PropTypes.string,
   wide: PropTypes.bool,
+  handleClick: PropTypes.func.isRequired,
 };
 
 Button.defaultProps = {
