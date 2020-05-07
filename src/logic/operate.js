@@ -1,7 +1,6 @@
 import Big from 'big-js';
 
 const operate = (numberOne, numberTwo, operation) => {
-  console.log(numberOne, numberTwo, operation);
   let res = '';
   const big = new Big(numberOne);
   switch (operation) {

@@ -37,7 +37,6 @@ export default class App extends Component {
       operation: newOperation,
       prevNext: newPrevNext,
     });
-    console.log(newData);
   }
 
   render() {

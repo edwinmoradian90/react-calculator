@@ -6,7 +6,6 @@ const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 export default {
   calculate: (data, buttonName) => {
     let result;
-    let temp;
     let {
       total, next, operation, prevNext,
     } = data;
@@ -19,7 +18,6 @@ export default {
     };
 
     if (operations.includes(buttonName)) {
-      console.log('clicked operation', buttonName);
       if (buttonName === '=') {
         if (!total && !operation) {
           result = '0';
@@ -34,8 +32,9 @@ export default {
         } else if (total && operation && next) {
           equals();
         }
+      } else if (total && next && operation) {
+        equals();
       } else if (total) {
-        console.log('total');
         operation = buttonName;
         result = total;
       } else if (!total) {
@@ -45,7 +44,6 @@ export default {
         operation = buttonName;
       }
     } else if (numbers.includes(buttonName)) {
-      console.log('clicked number');
       if (!total) {
         total = buttonName;
         result = total;
@@ -53,14 +51,11 @@ export default {
         total = total !== '0' ? total + buttonName : buttonName;
         result = total;
       } else if (total && operation) {
-        temp = temp ? temp + buttonName : buttonName;
-        next = temp;
+        next = next ? next + buttonName : buttonName;
         prevNext = next;
         result = next;
-        console.log('second number', prevNext);
       }
     } else {
-      console.log('clicked something else', buttonName);
       const parsedTotal = parseInt(total, 10);
       const parsedNext = parseInt(next, 10);
 
@@ -79,6 +74,7 @@ export default {
           total = null;
           next = null;
           operation = null;
+          prevNext = null;
           break;
         case '.':
           if (next) {
