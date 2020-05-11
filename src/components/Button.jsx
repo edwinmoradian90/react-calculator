@@ -1,6 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const keys = {
+  13: '=',
+  27: 'AC',
+  96: '0',
+  97: '1',
+  98: '2',
+  99: '3',
+  100: '4',
+  101: '5',
+  102: '6',
+  103: '7',
+  104: '8',
+  105: '9',
+  106: 'X',
+  107: '+',
+  109: '-',
+  110: '.',
+  111: '÷',
+};
+
 const Button = props => {
   const {
     name, color, wide, handleClick,
@@ -10,13 +30,17 @@ const Button = props => {
     const buttonName = e.target.getAttribute('name');
     handleClick(buttonName);
   };
+  const keyDown = e => {
+    e.preventDefault();
+    if (keys[e.keyCode]) { handleClick(keys[e.keyCode]); }
+  };
 
   return (
     <div
       role="button"
       tabIndex={0}
       onClick={clickHandler}
-      onKeyDown={clickHandler}
+      onKeyDown={keyDown}
       name={name}
       style={style}
       className={wide ? 'buttonWide' : 'button'}

@@ -3,6 +3,7 @@ import operate from './operate';
 
 const operations = ['+', '-', 'X', '÷', '%', '='];
 const numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+const error = 'Can not divide by zero';
 export default {
   calculate: (data, buttonName) => {
     let result;
@@ -13,9 +14,22 @@ export default {
     const equals = () => {
       result = operate(parseInt(total, 10), parseInt(next, 10), operation);
       result.toString();
-      total = result;
+      total = result !== '0' ? result : null;
       next = null;
     };
+
+    const divideByZero = () => {
+      total = error;
+      result = total;
+    };
+
+    if (result === error || total === error) {
+      result = '0';
+      total = result;
+      next = null;
+      prevNext = null;
+      operation = null;
+    }
 
     if (operations.includes(buttonName)) {
       if (buttonName === '=') {
@@ -30,7 +44,11 @@ export default {
           next = prevNext || total;
           equals();
         } else if (total && operation && next) {
-          equals();
+          if (next === '0' && operation === '÷') {
+            divideByZero();
+          } else {
+            equals();
+          }
         }
       } else if (total && next && operation) {
         equals();
@@ -51,7 +69,7 @@ export default {
         total = total !== '0' ? total + buttonName : buttonName;
         result = total;
       } else if (total && operation) {
-        next = next ? next + buttonName : buttonName;
+        next = next && next !== '0' ? next + buttonName : buttonName;
         prevNext = next;
         result = next;
       }
